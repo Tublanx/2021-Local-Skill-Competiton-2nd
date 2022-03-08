@@ -4,15 +4,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -22,11 +23,17 @@ public class Baseframe extends JFrame {
 	static Connection con = DB.con;
 	static Statement stmt = DB.stmt;
 
+	static JPanel n, c, s, e, w;
+
+	static String uno = "", cno = "";
+
+	static DecimalFormat df = new DecimalFormat("#,##0");
 	static DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 
 	static {
 		try {
-			stmt.execute("use 2022¡ˆπÊ_1");
+			stmt.execute("use 2022ÏßÄÎ∞©_1");
+			dtcr.setHorizontalAlignment(0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,11 +49,11 @@ public class Baseframe extends JFrame {
 	}
 
 	void eMsg(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "∞Ê∞Ì", 0);
+		JOptionPane.showMessageDialog(null, msg, "Í≤ΩÍ≥†", 0);
 	}
 
 	void iMsg(String msg) {
-		JOptionPane.showMessageDialog(null, msg, "¡§∫∏", 1);
+		JOptionPane.showMessageDialog(null, msg, "Ï†ïÎ≥¥", 1);
 	}
 
 	String getone(String sql) {
@@ -74,7 +81,7 @@ public class Baseframe extends JFrame {
 
 	JLabel lbl2(String t, int a, int s) {
 		var l = new JLabel(t, a);
-		l.setFont(new Font("HY«ÏµÂ∂Û¿ŒM", Font.TYPE1_FONT, s));
+		l.setFont(new Font("HYÌó§ÎìúÎùºÏù∏M", Font.TYPE1_FONT, s));
 		return l;
 	}
 
@@ -113,6 +120,25 @@ public class Baseframe extends JFrame {
 		}
 
 		return t;
+	}
+
+	void addRow(DefaultTableModel m, String sql) {
+		m.setRowCount(0);
+
+		try {
+			var rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				var row = new Object[m.getColumnCount()];
+				for (int i = 0; i < row.length; i++) {
+					row[i] = rs.getString(i + 1);
+				}
+
+				m.addRow(row);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Baseframe(String t, int w, int h) {
