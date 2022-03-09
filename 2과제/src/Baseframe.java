@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -26,6 +27,7 @@ public class Baseframe extends JFrame {
 	static JPanel n, c, s, e, w;
 
 	static String uno = "", cno = "";
+	static int tno;
 
 	static DecimalFormat df = new DecimalFormat("#,##0");
 	static DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();

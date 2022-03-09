@@ -10,7 +10,7 @@ public class DB {
 	static {
 		try {
 			con = DriverManager.getConnection(
-					"jdbc:mysql://localhost?serverTimezone=UTC&allowPublicKeyRetreval=true&allowLoadLocalInfile=true",
+					"jdbc:mysql://localhost?serverTimezone=UTC&allowPublicKeyRetreval=true&allowLoadLocalInfile=true&allowPublicKeyRetrieval=true",
 					"root", "1234");
 			stmt = con.createStatement();
 		} catch (SQLException e) {

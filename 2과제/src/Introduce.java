@@ -107,6 +107,8 @@ public class Introduce extends Baseframe {
 			lbl.setFont(new Font("HY헤드라인M", Font.TYPE1_FONT, 15));
 			lbl.setForeground(Color.WHITE);
 		}
+		
+		btns.get(0).doClick();
 
 		tname.setForeground(Color.WHITE);
 		explan.setForeground(Color.WHITE);

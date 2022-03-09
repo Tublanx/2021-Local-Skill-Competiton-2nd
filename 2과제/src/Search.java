@@ -75,7 +75,7 @@ public class Search extends Baseframe {
 		cc.removeAll();
 
 		try {
-			String sql = "SELECT \r\n" + "    c.c_no, c.c_name\r\n" + "FROM\r\n" + "    2022지방_1.cafe c,\r\n"
+			String sql = "SELECT \r\n" + "    c.c_no, c.c_name, t.t_no\r\n" + "FROM\r\n" + "    2022지방_1.cafe c,\r\n"
 					+ "    area a,\r\n" + "    genre g,\r\n" + "    theme t\r\n" + "WHERE\r\n"
 					+ "    c.a_no = a.a_no AND t.g_no = g.g_no\r\n"
 					+ "        AND FIND_IN_SET(t.t_no, c.t_no) and a.a_name like '%"
@@ -86,7 +86,7 @@ public class Search extends Baseframe {
 			var pst = con.prepareStatement(sql);
 			var rs = pst.executeQuery();
 			while (rs.next()) {
-				var item = new Item(rs.getString(1));
+				var item = new Item(rs.getString(1), rs.getInt(3));
 				cc.add(item);
 			}
 		} catch (SQLException e) {
@@ -101,7 +101,7 @@ public class Search extends Baseframe {
 	class Item extends JPanel {
 		String cno;
 
-		public Item(String cno) {
+		public Item(String cno, int tno) {
 			super(new BorderLayout());
 			this.cno = cno;
 
@@ -116,6 +116,7 @@ public class Search extends Baseframe {
 				public void mousePressed(MouseEvent e) {
 					if (e.getClickCount() == 2) {
 						Baseframe.cno = cno;
+						Baseframe.tno = tno;
 						new Introduce().addWindowListener(new Before(Search.this));
 					}
 				}

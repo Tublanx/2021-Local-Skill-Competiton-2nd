@@ -63,6 +63,8 @@ public class Main extends Baseframe {
 				}
 			}));
 		}
+		
+		com.addActionListener(e -> changeImage());
 
 		logout();
 		changeImage();
