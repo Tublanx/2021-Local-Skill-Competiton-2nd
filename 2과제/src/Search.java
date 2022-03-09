@@ -34,7 +34,7 @@ public class Search extends Baseframe {
 		super("검색", 800, 500);
 
 		this.add(n = new JPanel(new BorderLayout()), "North");
-		this.add(c = new JPanel(new BorderLayout()));
+		this.add(s = new JPanel(new BorderLayout()));
 
 		n.add(nn = new JPanel(new FlowLayout(0)), "North");
 		n.add(ns = new JPanel(new FlowLayout(2)), "South");
@@ -47,8 +47,8 @@ public class Search extends Baseframe {
 		ns.add(txt = new JTextField(15));
 		ns.add(btn("검색", e -> search()));
 
-		c.add(sz(new JScrollPane(t), 80, 350), "West");
-		c.add(new JScrollPane(cc = new JPanel(new GridLayout(0, 3, 5, 5))));
+		s.add(sz(new JScrollPane(t), 80, 350), "West");
+		s.add(new JScrollPane(cc = new JPanel(new GridLayout(0, 3, 5, 5))));
 
 		com.addItem("전체");
 

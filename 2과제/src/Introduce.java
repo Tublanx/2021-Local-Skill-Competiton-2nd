@@ -92,8 +92,8 @@ public class Introduce extends Baseframe {
 		for (int i = 0; i < str.length; i++) {
 			JLabel lbl = new JLabel(str[i]);
 
-			c.add(lbl);
-			c.add(this.lbl[i]);
+			s.add(lbl);
+			s.add(this.lbl[i]);
 			lbl.setBounds(360, 400 + i * 20, 200, 25);
 
 			if (i == 1) {

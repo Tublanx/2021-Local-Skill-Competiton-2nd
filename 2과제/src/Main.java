@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
@@ -58,18 +59,18 @@ public class Main extends Baseframe {
 					new GameList().addWindowListener(new Before(Main.this));
 				} else if (e.getActionCommand().equals("예약현황")) {
 					new Chart().addWindowListener(new Before(Main.this));
-				} else if(e.getActionCommand().equals("마이페이지")) {
+				} else if (e.getActionCommand().equals("마이페이지")) {
 					new MyPage().addWindowListener(new Before(Main.this));
 				}
 			}));
 		}
-		
+
 		com.addActionListener(e -> changeImage());
 
 		logout();
 		changeImage();
-
-		timer.start();
+//
+//		timer.start();
 
 		this.setVisible(true);
 	}

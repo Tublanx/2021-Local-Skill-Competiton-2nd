@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -18,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class Baseframe extends JFrame {
 
@@ -26,7 +29,7 @@ public class Baseframe extends JFrame {
 
 	static JPanel n, c, s, e, w;
 
-	static String uno = "", cno = "";
+	static String uno = "", cno = "", qno="";
 	static int tno;
 
 	static DecimalFormat df = new DecimalFormat("#,##0");
@@ -111,6 +114,36 @@ public class Baseframe extends JFrame {
 
 	JTable table(DefaultTableModel m) {
 		var t = new JTable(m);
+
+		t.getTableHeader().setReorderingAllowed(false);
+		t.getTableHeader().setResizingAllowed(false);
+
+		t.setSelectionMode(0);
+
+		for (int i = 0; i < t.getColumnCount(); i++) {
+			t.getColumnModel().getColumn(i).setCellRenderer(dtcr);
+		}
+
+		return t;
+	}
+
+	JTable blueTable(DefaultTableModel m, String id) {
+		var t = new JTable(m) {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+				var c = super.prepareRenderer(renderer, row, column);
+
+				c.setBackground(null);
+				c.setForeground(Color.BLACK);
+
+				if (id.equals(getValueAt(row, 2) + "")) {
+					c.setForeground(Color.WHITE);
+					c.setBackground(Color.BLUE);
+				}
+
+				return c;
+			}
+		};
 
 		t.getTableHeader().setReorderingAllowed(false);
 		t.getTableHeader().setResizingAllowed(false);
