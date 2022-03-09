@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -27,7 +28,7 @@ public class RoomEscape extends Baseframe {
 
 	int idx = 0;
 
-	public RoomEscape() {
+	public RoomEscape(GameList gameList) {
 		super("방탈출", 400, 450);
 
 		this.add(c = new JPanel(new GridLayout(3, 3, 10, 10)));
@@ -36,8 +37,10 @@ public class RoomEscape extends Baseframe {
 				timer.stop();
 				btn.setText("게임시작");
 			} else {
-				qno = imgs.get(idx).getName();
-				new Quiz().addWindowListener(new Before(RoomEscape.this));
+				qno = imgs.get(idx - 1).getName();
+				execute("update reservation set r_attend = 1 where r_no=" + rno);
+				gameList.data();
+				new Quiz(gameList).addWindowListener(new Before(RoomEscape.this));
 			}
 		}), "South");
 
@@ -53,7 +56,7 @@ public class RoomEscape extends Baseframe {
 						Toolkit.getDefaultToolkit().getImage("Datafiles/퀴즈/" + files.get(files.size() - 1) + ".jpg")
 								.getScaledInstance(150, 150, 4)));
 				imgs.add(img);
-				img.setName(length + "");
+				img.setName(files.get(files.size() - 1) + "");
 				c.add(imgs.get(imgs.size() - 1));
 				imgs.get(imgs.size() - 1).setEnabled(false);
 			}
@@ -75,7 +78,11 @@ public class RoomEscape extends Baseframe {
 							JOptionPane.YES_NO_OPTION);
 
 					if (yn == JOptionPane.YES_OPTION) {
+						execute("update reservation set r_attend = 1 where r_no=" + rno);
+						gameList.data();
 						dispose();
+					} else {
+						setDefaultCloseOperation(0);
 					}
 				}
 			}

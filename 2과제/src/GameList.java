@@ -1,5 +1,7 @@
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 
 import javax.swing.JScrollPane;
@@ -18,9 +20,7 @@ public class GameList extends Baseframe {
 		this.add(lbl2("회원명 : " + getone("select u_name from user where u_no=" + uno), 0, 30), "North");
 		this.add(jsc);
 
-		addRow(m,
-				"SELECT r_no, r_date, c_name, g_name, t_name FROM 2022지방_1.reservation r, cafe c, theme t, genre g where r.c_no = c.c_no and r.t_no = t.t_no and t.g_no = g.g_no and u_no = "
-						+ uno + " and r_attend = 0;");
+		data();
 
 		t.addMouseListener(new MouseAdapter() {
 			@Override
@@ -29,11 +29,23 @@ public class GameList extends Baseframe {
 					eMsg("미래로 예약된 게임은 실행할 수 없습니다.");
 					return;
 				}
-				
-				new RoomEscape();
+
+				rno = t.getValueAt(t.getSelectedRow(), 0).toString();
+				new RoomEscape(GameList.this).addWindowListener(new Before(GameList.this));
 			}
 		});
 
 		this.setVisible(true);
+	}
+
+	void data() {
+		addRow(m,
+				"SELECT r_no, r_date, c_name, g_name, t_name FROM 2022지방_1.reservation r, cafe c, theme t, genre g where r.c_no = c.c_no and r.t_no = t.t_no and t.g_no = g.g_no and u_no = "
+						+ uno + " and r_attend = 0;");
+	}
+
+	public static void main(String[] args) {
+		uno = "1";
+		new GameList();
 	}
 }

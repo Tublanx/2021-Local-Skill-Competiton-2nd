@@ -29,7 +29,7 @@ public class Baseframe extends JFrame {
 
 	static JPanel n, c, s, e, w;
 
-	static String uno = "", cno = "", qno="";
+	static String uno = "", cno = "", rno = "", qno = "";
 	static int tno;
 
 	static DecimalFormat df = new DecimalFormat("#,##0");
